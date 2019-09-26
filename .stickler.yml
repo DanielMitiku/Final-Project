@@ -1,0 +1,19 @@
+linters:
+    rubocop:
+        display_cop_names: true
+        fixer: true
+files:
+   ignore:
+       - 'bin/*'
+       - 'config/*'
+       - 'lib/*'
+       - 'db/*'
+       - 'log/*'
+       - 'public/*'
+       - 'spec/*'
+       - 'storage/*'
+       - 'test/*'
+       - 'tmp/*'
+       - 'vendor/*'
+       - 'docs/*'
+       - 'node_modules/*'
