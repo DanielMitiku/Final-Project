@@ -1,0 +1,22 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'lib/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'spec/**/*'
+    - 'storage/**/*'
+    - 'test/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'docs/**/*'
+    - 'node_modules/**/*'
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 300
+  Enabled: false
+MethodLength:
+  Max: 35
