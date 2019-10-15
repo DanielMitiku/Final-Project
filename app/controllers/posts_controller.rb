@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user, only: [:destroy, :edit, :update]
+  before_action :correct_user, only: %i[destroy edit update]
 
   def new
     @post = current_user.posts.new
@@ -13,7 +15,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash[:success] = "Post has been created!"
+      flash[:success] = 'Post has been created!'
       redirect_to posts_path
     else
       render 'new'
@@ -27,7 +29,7 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
     if @post.update_attributes(post_params)
-      flash[:success] = "Post updated"
+      flash[:success] = 'Post updated'
       redirect_to posts_path
     else
       render 'edit'
@@ -36,11 +38,11 @@ class PostsController < ApplicationController
 
   def destroy
     @post = current_user.posts.find(params[:id])
-    if @post 
+    if @post
       @post.destroy
-      flash[:success] = "Post has been deleted"
+      flash[:success] = 'Post has been deleted'
     else
-      flash[:alert] = "Error, Please try again"
+      flash[:alert] = 'Error, Please try again'
     end
     redirect_to root_path
   end
@@ -59,5 +61,4 @@ class PostsController < ApplicationController
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to posts_path if @post.nil?
   end
-
 end
