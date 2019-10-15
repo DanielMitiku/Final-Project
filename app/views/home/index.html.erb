@@ -11,3 +11,24 @@
     <% end %>
 </div>
 
+<% if user_signed_in? %>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <%= button_to "Create Post", new_post_path, method: :get, class: "btn-primary btn" %>
+        </div>
+    </div>
+    <% if @posts.any? %>
+        <div>
+            <h3 class="text-center">Here are the trending posts</h3>
+            <%= will_paginate @posts%>
+                <ul>
+                    <% @posts.each do |post| %>
+                        <%= render post %>
+                        <br>
+                        <hr>
+                    <% end %>                
+                </ul>
+            <%= will_paginate @posts%>
+        </div>
+    <% end %>
+<% end %>

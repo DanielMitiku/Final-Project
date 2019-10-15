@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "Post has been created!"
-      redirect_to @posts
+      redirect_to posts_path
     else
       render 'new'
     end
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
     if @post.update_attributes(post_params)
       flash[:success] = "Post updated"
-      redirect_to @posts
+      redirect_to posts_path
     else
       render 'edit'
     end
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
 
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
-    redirect_to root_url if @post.nil?
+    redirect_to posts_path if @post.nil?
   end
 
 end
