@@ -10,6 +10,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header'%>
+      <div class='container'>
+        <% if notice %>
+          <div class="alert alert-success"><%= notice %></div>
+        <% elsif alert %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% else %>
+          <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+        <% end %>
+        <%= yield %>
+        <%= render 'layouts/footer' %>
+      </div>
   </body>
 </html>

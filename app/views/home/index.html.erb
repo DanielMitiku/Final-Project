@@ -1,0 +1,13 @@
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Rbook!</h1>
+    <p class="lead">This is a ruby on rails social media app built just for you.</p>
+    <hr class="my-4">
+    <% if !user_signed_in?%>
+        <p>Sign up or Log in to continue</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/users/sign_up" role="button">Sign Up</a>
+            <a class="btn btn-primary btn-lg" href="/users/sign_in" role="button">Log In</a>
+        </p>
+    <% end %>
+</div>
+
