@@ -1,0 +1,16 @@
+<% if @users.any? %>
+    <h3 class="text-center">Here are the users participating in this app</h3>
+    <div>
+        <%= will_paginate %>
+            <ul>
+                <% @users.each do |user| %>
+                    <%= render user %>
+                    <br>
+                    <hr>
+                <% end %>                
+            </ul>
+        <%= will_paginate %>
+    </div>
+<% else %>
+    <h3>No users till now!</h3>
+<% end %>

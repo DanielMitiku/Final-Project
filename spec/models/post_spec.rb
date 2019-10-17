@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-    user = User.create(first_name: "dani", last_name: "wesego", gender: "male", birthdate: DateTime.now, email: "dani@web.com", password: "12345678", password_confirmation: "12345678")
+    let(:user) {User.create(first_name: "dani", last_name: "wesego", gender: "male", birthdate: DateTime.now, email: "dani@webspr.com", password: "12345678", password_confirmation: "12345678")}
     subject {
         described_class.new(title: "post_title", body: "Lorem ipsum", user_id: user.id)
       }
