@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <%= button_to "Create Post", new_post_path, method: :get, class: "btn-primary btn" %>
+    </div>
+</div>
+<% if current_user.posts.any? %>
+    <h3 class="text-center">Here are the posts you created</h3>
+    <div>
+        <%= will_paginate %>
+            <ul>
+                <% current_user.posts.each do |post| %>
+                    <%= render post %>
+                    <br>
+                    <hr>
+                <% end %>                
+            </ul>
+        <%= will_paginate %>
+    </div>
+<% else %>
+    <h3>You have not created any posts</h3>
+<% end %>

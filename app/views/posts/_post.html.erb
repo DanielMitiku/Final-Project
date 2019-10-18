@@ -1,0 +1,6 @@
+<ul>
+  <p><%= link_to post.title, post %></p>
+  <p><%= post.body %></p>
+  <p> Modified Date: &nbsp<%= post.updated_at %></p>
+  <p> Created by: &nbsp<%= post.user.first_name + " " + post.user.last_name %></p>
+</ul>

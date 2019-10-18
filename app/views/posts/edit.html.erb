@@ -1,0 +1,17 @@
+<h1>Edit Post</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@post) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body, class: 'form-control', :cols => "15", :rows => "7" %>
+
+      <%= f.submit "Update Post", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
