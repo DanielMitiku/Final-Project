@@ -9,6 +9,8 @@ class PostsController < ApplicationController
   end
 
   def index
+    @like = Like.new
+    @comment = Comment.new
     @posts = Post.paginate(page: params[:page])
   end
 
@@ -49,6 +51,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   private
