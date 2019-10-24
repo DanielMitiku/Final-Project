@@ -1,0 +1,5 @@
+<div class="row">
+    <div class="col-md-1">
+        <%= button_to "Unlike", 'likes/'+@liked.id.to_s, params: {'post[id]' => @post_id}, method: :delete, class: "btn-danger" %>
+    </div>
+</div>

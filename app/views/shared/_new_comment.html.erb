@@ -1,0 +1,14 @@
+<br/>
+<div class="row">
+    <div class="col-md-6">
+        <%= form_for(@comment) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+
+            <%= f.hidden_field :post_id, value: @post_id %>
+
+            <%= f.text_area :body, class: 'form-control', :cols => "10", :rows => "4" %>
+
+            <%= f.submit "Comment", class: "col-md-2 btn btn-info" %>
+        <% end %>
+    </div>
+</div>
