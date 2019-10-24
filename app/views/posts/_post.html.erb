@@ -1,0 +1,54 @@
+<ul>
+  <p><%= link_to post.title, post %></p>
+  <p><%= post.body %></p>
+  <p> posted <%= time_ago_in_words(post.created_at) %> ago</p>
+  <p> By: &nbsp<%= post.user.first_name + " " + post.user.last_name %></p>
+  <div class="row">
+    <% if current_user == post.user %>
+        <div class="col-md-1">
+            <%= button_to "delete", post, method: :delete,
+                                        data: { confirm: "You sure?" }, class: "btn-danger" %>
+        </div>
+        <div class="col-md-1">
+            <%= button_to "edit", edit_post_path(post) , method: :get, class: "btn-primary" %>
+        </div>
+    <% end%>
+  </div>
+  <% @post_id = post.id %>
+  <% @liked = post.likes.find_by(user_id: current_user.id) %>
+  <% if current_user.likes.find_by(post_id: post.id) %>
+    <%= render 'shared/unlike' %>
+  <% else %>
+    <%= render 'shared/like' %>
+  <% end %>
+  <br/>
+  <% if post.likes.any?%>
+    <h4 class="text-left">Liked by: </h4>
+      <ul>
+          <% post.likes.each do |like| %>
+              <p><%= link_to like.user.first_name, 'users/'+like.user.id.to_s %></p>
+          <% end %>                
+      </ul>
+  <% end %>
+  <% if post.comments.any? %>
+  <h4 class="text-left">Comments</h4>
+      <ul>
+          <% post.comments.each do |comment| %>
+              <p><%= comment.body %></p>
+              <p>By <%= link_to comment.user.first_name, '/users/'+comment.user.id.to_s %> <%= time_ago_in_words(comment.created_at)%> ago</p>
+                <% if current_user == comment.user %>
+                    <div class="col-md-1">
+                        <%= button_to "delete", comment, params: {'comment[id]' => comment.id}, method: :delete,
+                                                    data: { confirm: "You sure?" }, class: "btn-danger" %>
+                    </div>
+                    <div class="col-md-1">
+                        <%= button_to "edit", edit_comment_path(comment), method: :get, class: "btn-primary" %>
+                    </div>
+                <% end%>
+                <br/>
+              <hr>
+          <% end %>                
+      </ul>
+  <% end %>
+  <%= render 'shared/new_comment' %>
+</ul>

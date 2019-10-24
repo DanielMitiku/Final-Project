@@ -1,0 +1,60 @@
+<h3 class="text-center">Sign Up</h3>
+<br/>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="field">
+            <%= f.label :"first Name" %><br />
+            <%= f.text_field :first_name, autofocus: true, class: 'form-control'%>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="field">
+            <%= f.label :"last Name" %><br />
+            <%= f.text_field :last_name, class: 'form-control'%>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <%= f.label :gender %><br/>
+        <label class='radio-inline'>Male&nbsp<%= f.radio_button :gender, 'male' %></label>
+        <label class='radio-inline'>Female<%= f.radio_button :gender, 'female' %></label>
+      </div>
+      <br/>
+
+      <div class="field">
+        <%= f.label :birthdate %><br />
+        <%= f.date_field :birthdate, class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autocomplete: "email", class: 'form-control'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
+
