@@ -17,20 +17,20 @@ class User < ApplicationRecord
   validates :birthdate, presence: true
 
   def friends
-    friends_array = initiated_friendships.map { |friendship| friendship.requestee if friendship.status }
-    friends_array + invited_friendships.map { |friendship| friendship.requestor if friendship.status }
+    friends_array = initiated_friendships.map { |f| f.requestee if f.status }
+    friends_array + invited_friendships.map { |f| f.requestor if f.status }
   end
 
   def pending_friends
-    initiated_friendships.map { |friendship| friendship.requestee unless friendship.status }.compact
+    initiated_friendships.map { |f| f.requestee unless f.status }.compact
   end
 
   def friend_requests
-    invited_friendships.map { |friendship| friendship.requestor unless friendship.status }.compact
+    invited_friendships.map { |f| f.requestor unless f.status }.compact
   end
 
   def confirm_friend(user)
-    friendship = invited_friendships.find { |friendship| friendship.requestor == user }
+    friendship = invited_friendships.find { |f| f.requestor == user }
     friendship.status = true
     friendship.save
   end
@@ -38,23 +38,18 @@ class User < ApplicationRecord
   def add_friend(user)
     unless friend?(user)
       add_friendship = Friendship.new(requestee_id: user.id, requestor_id: id)
-      if add_friendship.save
-        return true
-      else
-        return false
-      end
+      return true if add_friendship.save
     end
+    false
   end
 
   def remove_friend(user)
-    if friend?(user) || user.friend_requests.include?(self)
-      remove_friendship = Friendship.find_by(requestee_id: user.id, requestor_id: id) || Friendship.find_by(requestee_id: id, requestor_id: user.id)
-      if remove_friendship.destroy
-        return true
-      else
-        return false
-      end
-    end
+    return unless friend?(user) || user.friend_requests.include?(self)
+
+    remove_friendship = Friendship.find_by(requestee_id: user.id, requestor_id: id) || Friendship.find_by(requestee_id: id, requestor_id: user.id)
+    return true if remove_friendship.destroy
+
+    false
   end
 
   def friend?(user)

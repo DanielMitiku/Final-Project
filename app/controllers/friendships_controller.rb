@@ -31,13 +31,7 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @friend = User.find_by(id: params[:id])
-    if current_user.friend?(@friend) && current_user.remove_friend(@friend)
-      flash[:success] = 'Friend Removed'
-    elsif current_user.pending_friends.include?(@friend) && current_user.remove_friend(@friend)
-      flash[:success] = 'Friend Request Removed'
-    else
-      flash[:danger] = 'Error Removing Friend'
-    end
+    remove_friend(@friend)
     redirect_to users_path
   end
 
@@ -45,6 +39,16 @@ class FriendshipsController < ApplicationController
 
   def friendship_params
     params.require(:friendship).permit(:requestor_id, :requestee_id)
+  end
+
+  def remove_friend(friend)
+    if current_user.friend?(friend) && current_user.remove_friend(friend)
+      flash[:success] = 'Friend Removed'
+    elsif current_user.pending_friends.include?(friend) && current_user.remove_friend(friend)
+      flash[:success] = 'Friend Request Removed'
+    else
+      flash[:danger] = 'Error Removing Friend'
+    end
   end
 
   def correct_user
