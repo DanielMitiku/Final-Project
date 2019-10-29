@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: %i[destroy]
@@ -13,16 +15,16 @@ class FriendshipsController < ApplicationController
   def update
     @friend = User.find_by(id: params[:id])
     current_user.confirm_friend(@friend)
-    flash[:success] = "You are now Friends"
+    flash[:success] = 'You are now Friends'
     redirect_to notifications_path
   end
 
   def create
     @friend = User.find_by(id: params[:friend][:id])
     if current_user.add_friend(@friend)
-        flash[:success] = "Friend Request Sent"
-    else 
-        flash[:danger] = "Error Sending Friend Request"
+      flash[:success] = 'Friend Request Sent'
+    else
+      flash[:danger] = 'Error Sending Friend Request'
     end
     redirect_to users_path
   end
@@ -30,11 +32,11 @@ class FriendshipsController < ApplicationController
   def destroy
     @friend = User.find_by(id: params[:id])
     if current_user.friend?(@friend) && current_user.remove_friend(@friend)
-        flash[:success] = "Friend Removed"
-    elsif current_user.pending_friends.include?(@friend) && current_user.remove_friend(@friend) 
-        flash[:success] = "Friend Request Removed"
+      flash[:success] = 'Friend Removed'
+    elsif current_user.pending_friends.include?(@friend) && current_user.remove_friend(@friend)
+      flash[:success] = 'Friend Request Removed'
     else
-        flash[:danger] = "Error Removing Friend"
+      flash[:danger] = 'Error Removing Friend'
     end
     redirect_to users_path
   end
