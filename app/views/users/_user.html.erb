@@ -1,4 +1,21 @@
 <ul>
   <p><%= user.first_name + " " + user.last_name %></p>
   <p> Joined on: &nbsp<%= user.created_at %></p>
+  <div class="row">
+    <% if current_user != user %>
+      <% if current_user.pending_friends.include?(user)%>
+        <div class="col-md-2">
+              <%= button_to "Cancel Friend Request", '/addfriend/'+user.id.to_s , method: :delete, class: "btn-danger" %>
+        </div>
+      <% elsif !current_user.friend?(user) %>
+          <div class="col-md-2">
+              <%= button_to "Add Friend", addfriend_path, params: {'friend[id]' => user.id}, method: :post, class: "btn-primary" %>
+          </div>
+      <% else %>
+          <div class="col-md-2">
+              <%= button_to "Remove Friend", addfriend_path(user) , method: :delete, class: "btn-danger" %>
+          </div>
+      <% end%>
+    <% end %>
+  </div>
 </ul>

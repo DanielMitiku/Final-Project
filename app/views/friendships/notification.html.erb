@@ -1,0 +1,21 @@
+<% if @invitations.any? %>
+    <h3 class="text-center">Here are Your Friend Requests</h3>
+    <div>
+            <ul>
+                <% @invitations.each do |invitation| %>
+                    <p><%= invitation.first_name + " " + invitation.last_name %></p>
+                    <div class="col-md-2">
+                        <%= button_to "Accept Friend Request", '/addfriend/'+invitation.id.to_s , method: :patch, class: "btn-primary" %>
+                    </div>
+                    <br>
+                    <hr>
+                <% end %>                
+            </ul>
+    </div>
+<% else %>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h3 class="text-center">You have no Friend Request</h3>
+    </div>
+</div>
+<% end %>
