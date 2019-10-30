@@ -44,7 +44,7 @@ class User < ApplicationRecord
   end
 
   def remove_friend(user)
-    return unless friend?(user) || user.friend_requests.include?(self)
+    return false unless friend?(user) || user.friend_requests.include?(self)
 
     remove_friendship = Friendship.find_by(requestee_id: user.id, requestor_id: id) || Friendship.find_by(requestee_id: id, requestor_id: user.id)
     return true if remove_friendship.destroy

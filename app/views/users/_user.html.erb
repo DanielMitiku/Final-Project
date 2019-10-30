@@ -13,7 +13,7 @@
           </div>
       <% else %>
           <div class="col-md-2">
-              <%= button_to "Remove Friend", addfriend_path(user) , method: :delete, class: "btn-danger" %>
+              <%= button_to "Remove Friend", '/addfriend/'+user.id.to_s , method: :delete, class: "btn-danger" %>
           </div>
       <% end%>
     <% end %>
