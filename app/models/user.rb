@@ -16,6 +16,10 @@ class User < ApplicationRecord
   validates :gender, presence: true
   validates :birthdate, presence: true
 
+  def feed
+    Post.where('user_id IN (?) OR user_id = ?', friends, id)
+  end
+
   def friends
     friends_array = initiated_friendships.map { |f| f.requestee if f.status }
     friends_array + invited_friendships.map { |f| f.requestor if f.status }

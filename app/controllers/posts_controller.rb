@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def index
     @like = Like.new
     @comment = Comment.new
-    @posts = Post.paginate(page: params[:page])
+    @posts = current_user.posts.paginate(page: params[:page])
   end
 
   def create
