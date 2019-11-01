@@ -23,3 +23,7 @@ MethodLength:
 Metrics/AbcSize:
   Include: ["app/models/*"]
   Max: 20
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false

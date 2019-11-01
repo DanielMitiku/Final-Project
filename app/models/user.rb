@@ -14,8 +14,8 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :gender, presence: true
-  validates :birthdate, presence: true
+  validates :gender, presence: true, unless: -> { from_facebook? }
+  validates :birthdate, presence: true, unless: -> { from_facebook? }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -36,6 +36,10 @@ class User < ApplicationRecord
         user.email = data['email'] if user.email.blank?
       end
     end
+  end
+
+  def from_facebook?
+    provider && uid
   end
 
   def feed
