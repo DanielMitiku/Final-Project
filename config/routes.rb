@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   get '/users', to: 'users#index'
   get '/users/:id', to: 'users#show'
   get '/friends', to: 'friendships#index'

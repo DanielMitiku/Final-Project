@@ -5,6 +5,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  devise :omniauthable, omniauth_providers: %i[facebook]
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -13,8 +14,33 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :gender, presence: true
-  validates :birthdate, presence: true
+  validates :gender, presence: true, unless: -> { from_facebook? }
+  validates :birthdate, presence: true, unless: -> { from_facebook? }
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user_name = auth.info.name.split
+      user.first_name = user_name.first
+      user.last_name = user_name.last
+      user.email = auth.info.email
+      user.gender = 'Male'
+      user.birthdate = 30.years.ago
+      user.password = Devise.friendly_token[0, 20]
+      user.profile_pic = auth.info.image
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if (data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info'])
+        user.email = data['email'] if user.email.blank?
+      end
+    end
+  end
+
+  def from_facebook?
+    provider && uid
+  end
 
   def feed
     Post.where('user_id IN (?) OR user_id = ?', friends, id)
