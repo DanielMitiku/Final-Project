@@ -11,8 +11,3 @@ Notes:
 * Database - Postgresql
 
 Done by:- Daniel  Mitiku
-
-The live version of the app can be found [here](https://serene-shore-00148.herokuapp.com/)
-
-The Database diagram for the project is shown below:
-![DatabaseDiagram](./docs/erd.jpg)
