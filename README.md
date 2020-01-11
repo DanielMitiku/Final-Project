@@ -1,18 +1,41 @@
-# README
+# RailsBook
 
-This is a Rails Project on a facebook like social media. It has most of the functionalities of facebook except realtime chat.
+> This is a Rails Project on a facebook like social media. It has most of the functionalities of facebook except realtime chat.
 
-Notes:
+## Built With
 
-* Ruby version - 2.6
+- Ruby version - 2.6
 
-* System dependencies - Devise, Omniauth
+- Rails 6
 
-* Database - Postgresql
+- System dependencies - Devise, Omniauth
 
-Done by:- Daniel  Mitiku
+- Database - Postgresql
 
-The live version of the app can be found [here](https://serene-shore-00148.herokuapp.com/)
+## Live Demo
+
+- The live version of the app can be found [here](https://serene-shore-00148.herokuapp.com/)
+
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+ - Clone this repository to your local machine using ```git clone git@github.com:DanielMitiku/Final-Project.git```.
+
+ - Run ```cd Final-Project``` to move into the app directory.
+ 
+ - Run ```bundle install``` to install dependencies.
+ 
+ - Run ```rails db:migrate``` to migrate the database.
+
+ - Run ```rails s``` to run the server.
+
+
+## Author
+
+👤 **Daniel Mitiku**
+
+- Github: [@danielmitiku](https://github.com/DanielMitiku)
 
 The Database diagram for the project is shown below:
 ![DatabaseDiagram](./docs/erd.jpg)
