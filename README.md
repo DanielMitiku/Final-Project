@@ -1,6 +1,6 @@
 # RailsBook
 
-> This is a Rails Project on a facebook like social media. It has most of the functionalities of facebook except realtime chat.
+> A Facebook-like social media app built using Rails. It includes most of the functionalities of Facebook except realtime chat.
 
 ## Built With
 
@@ -12,9 +12,17 @@
 
 - Database - Postgresql
 
-## Live Demo
+## Demo
 
-- The live version of the app can be found [here](https://serene-shore-00148.herokuapp.com/)
+🔥 [Demo](https://serene-shore-00148.herokuapp.com/)
+
+## Screenshot
+
+<img src="./screenshot.png">
+
+## The Database diagram for the project is shown below:
+
+![DatabaseDiagram](./docs/erd.jpg)
 
 ## Getting Started
 
@@ -30,12 +38,35 @@ To get a local copy up and running follow these simple example steps.
 
  - Run ```rails s``` to run the server.
 
+## Current Features
+
+- User signup and authentication
+- User signup using Omniauth 
+- Users can send/accept friend requests
+- Users can post
+- Users can like or comment on posts ...
+
+## Features you can add
+
+- Sending Email 
+- making it responsive ...
 
 ## Author
 
-👤 **Daniel Mitiku**
+- Github: [Daniel Mitiku](https://github.com/DanielMitiku)
+- LinkedIn: [@daniel-wesego](https://www.linkedin.com/in/daniel-wesego/)
+- Email: wedanielmitiku@gmail.com
 
-- Github: [@danielmitiku](https://github.com/DanielMitiku)
+## 🤝 Contributing
 
-The Database diagram for the project is shown below:
-![DatabaseDiagram](./docs/erd.jpg)
+- Contributions, issues and feature requests are welcome!
+
+- Feel free to create PR.
+
+## Show your support
+
+- Give a ⭐️ if you like this project and follow me on [Github](https://github.com/DanielMitiku) for more projects like this.
+
+## 📝 License
+
+- This project is [MIT](lic.url) licensed.
